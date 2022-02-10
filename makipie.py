@@ -4,6 +4,18 @@ from tkinter import filedialog as fd
 import tkinter.messagebox as msgbox
 import tkinter.ttk as ttk
 import os.path
+import sys
+
+# thanks to max
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 # not only these formats, formats that supported by pil can be used
 Format_List = ["BMP",
@@ -78,7 +90,7 @@ root.geometry("640x500")
 Progress_Bar_var = DoubleVar()
 
 fr_Banner = Frame(root)
-banner_image = PhotoImage(file="banner.png")
+banner_image = PhotoImage(file=resource_path("files/banner.png"))
 banner_label = Label(fr_Banner, image=banner_image)
 banner_label.pack()
 
